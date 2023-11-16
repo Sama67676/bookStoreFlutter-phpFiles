@@ -1,0 +1,25 @@
+<?php
+include ("../../../../html projects/Books store/conect.php");
+
+$sql="SELECT id, Name, Author, genre, amount, price FROM books_new_new_new_new";
+
+$result=mysqli_query($conn, $sql);
+
+$num_of_rows=mysqli_num_rows($result)>0;
+
+if($num_of_rows){
+    while($row = $result->fetch_assoc()){
+        $db_data[] = $row;
+    }
+    // Send back the complete records as a json
+    echo json_encode($db_data);
+}else{
+    echo "error";
+}
+$conn->close();
+
+return;
+
+
+ 
+?>
