@@ -1,0 +1,64 @@
+<?php
+include ("../../../../html projects/Books store/conect.php");
+header('Access-Control-Allow-Methods: POST');
+header("Access-Control-Allow-Headers: X-Requested-With");
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+$bookName= $bookAuthor =$bookGenre= $bookAmount= $bookPrice= '';
+
+if ($_POST){
+    if($_POST['id']){
+        $id = $_POST['id'];
+        echo $id;
+    }
+    if($_POST['bookName']){
+        $bookName = $_POST['bookName'];
+        echo $bookName;
+    }
+    if($_POST['bookAuthor']){
+    $bookAuthor = $_POST['bookAuthor'];
+    }
+    if($_POST['bookGenre']){
+        $bookGenre = $_POST['bookGenre'];
+    }
+    if($_POST['bookAmount']){
+        $bookAmount = intval($_POST['bookAmount']);
+    }
+    if($_POST['bookPrice']){
+        $bookPrice = floatval($_POST['bookPrice']);
+    }
+    $sql = "SELECT *  from books_new_new_new_new where id=$id";
+    $prev = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+    print_r($prev);
+
+    if($bookName!= ''){
+        $bookName= $prev['Name'];
+        echo $bookName;
+    }
+    if(!$bookAuthor!= ''){
+        $bookAuthor= $prev['Author'];
+        echo $bookAuthor;
+    }
+    if(!$bookGenre!= ''){
+        $bookGenre= $prev['genre'];
+        echo $bookGenre;
+    }
+    if(!$bookAmount!= ''){
+        $bookAmount= $prev['amount'];
+        echo $bookAmount;
+    }
+    if(!$bookPrice!= ''){
+        $bookPrice= $prev['price'];
+        echo $bookPrice;
+    }
+    
+    $sql="UPDATE books_new_new_new_new SET Name='$bookName', Author= '$bookAuthor', genre= '$bookGenre', amount= '$bookAmount', price= '$bookPrice' WHERE id='$id'";
+    
+
+ if(mysqli_query($conn, $sql)){
+     echo 'successfully UPDATED';
+ }else{
+     echo 'error did not UPDATE';
+ }
+}
+?>
