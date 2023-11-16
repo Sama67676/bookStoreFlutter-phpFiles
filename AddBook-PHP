@@ -1,0 +1,24 @@
+<?php
+include ("../../../../html projects/Books store/conect.php");
+header('Access-Control-Allow-Methods: POST');
+header("Access-Control-Allow-Headers: X-Requested-With");
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+   
+if ($_POST){
+    $bookName = $_POST['bookName'];
+    $bookAuthor = $_POST['bookAuthor'];
+    $bookGenre = $_POST['bookGenre'];
+    $bookAmount = intval($_POST['bookAmount']);
+    $bookPrice = floatval($_POST['bookPrice']);
+    echo $bookName;
+    
+    $sql="INSERT INTO books_new_new_new_new(Name,Author, genre,amount,image, price ) VALUES('$bookName', '$bookAuthor', '$bookGenre', '$bookAmount','', '$bookPrice')";
+
+ if(mysqli_query($conn, $sql)){
+     echo 'successfully added';
+ }else{
+     echo 'error did not add';
+ }
+}
+?>
